@@ -1,0 +1,8 @@
+[submodule "libs/cpython"]
+	path = libs/cpython
+	url = https://github.com/python/cpython.git
+	branch = 491bbedc209fea314a04cb3015da68fb0aa63238
+[submodule "libs/pybind11"]
+	path = libs/pybind11
+	url = https://github.com/pybind/pybind11.git
+	branch = master
