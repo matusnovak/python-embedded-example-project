@@ -6,7 +6,9 @@ project (PythonEmbeddedExample)
 set (CMAKE_CXX_STANDARD 11)
 
 # Specify build type
-set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Select build type")
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Debug")
+endif()
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 
 if (CMAKE_BUILD_TYPE MATCHES "Debug")

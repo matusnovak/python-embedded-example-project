@@ -1,6 +1,6 @@
 # Python Embedded Example Project
 
-This is an example project using mebedded python 3.8 (cpython) in C++ console application using CMake. This example project also contains pybind11 library for easy binding between C++ and python. 
+This is an example project using mebedded **[python 3.8](https://github.com/python/cpython)** in C++ console application using CMake. This example project also contains **[pybind11](https://github.com/pybind/pybind11)** library for easy binding between C++ and python. 
 
 Tested on Windows 10 with Visual Studio 2013, 2015, and 2017 (both x86 and x64). Also tested on Ubuntu with GCC (x64).
 
@@ -37,13 +37,13 @@ Visual Studio 2013 (or newer) or Linux with GCC. MinGW is sadly not supported, a
 
 ## Download
 
-Don't forget to initialise and update the submodules!
+Don't forget to initialise and update the submodules! The cpython is +200MB so it may take some time to during `git submodule update`.
 
 ```
 git clone https://github.com/matusnovak/python-embedded-example-project 
 cd python-embedded-example-project 
-git submodile init
-git submodule update
+git submodule init
+git submodule update --progress
 ```
 
 ## Build using Visual Studio on Windows
@@ -83,6 +83,10 @@ make
 
 The `PythonEmbeddedExample` executable will be generated.
 
+## Changing python version
+
+At the time of the creation of this example, Python 3.8 was just released. The cpython submodule is frozen to commit `491bbedc209fea314a04cb3015da68fb0aa63238`. If you want to change python version, change the `branch` in `.gitmodules` to `branch = 2.7` or any other version. See available branches at: <https://github.com/python/cpython>
+
 ## Example output
 
 Example output of the `PythonEmbeddedExample` executable.
@@ -93,3 +97,9 @@ Importing module...Initializing class...
 Example constructor with msg: Hello World
 Got msg back on C++ side: Hello World
 ```
+
+## fatal error LNK1104: cannot open file 'python38_d.lib'
+
+This happens when you run cmake with `-DCMAKE_BUILD_TYPE=MinSizeRel` and you are compiling the solution in Visual Studio as Debug. Simply, in Visual Studio, change the configuration to the one used in `CMAKE_BUILD_TYPE`.
+
+This happens because the cpython has been built via `CMAKE_BUILD_TYPE` but your Visual Studio is looking for a debug version of the python library (or the other way around).
